@@ -35,17 +35,17 @@ bid.setAuction(auction);
         bidRepository.save(bid);
     }
     // Relation with customer
-    public void assignBidToCustomer(Integer idCustomer,Integer idBid){
-        Customer customer=customerRepository.findCustomerById(idCustomer);
-        Bid bid=bidRepository.findBidById(idBid);
-        if(customer==null || bid==null){
-            throw new ApiException("Can't assign");
-        }
-        bid.getCustomers().add(customer);
-        // customer
-        bidRepository.save(bid);
-        customerRepository.save(customer);
-    }
+//    public void assignBidToCustomer(Integer idCustomer,Integer idBid){
+//        Customer customer=customerRepository.findCustomerById(idCustomer);
+//        Bid bid=bidRepository.findBidById(idBid);
+//        if(customer==null || bid==null){
+//            throw new ApiException("Can't assign");
+//        }
+//        bid.getCustomers().add(customer);
+//        // customer
+//        bidRepository.save(bid);
+//        customerRepository.save(customer);
+//    }
 
     public void updateBid(Integer id,Bid bid){
         Bid bid1=bidRepository.findBidById(id);

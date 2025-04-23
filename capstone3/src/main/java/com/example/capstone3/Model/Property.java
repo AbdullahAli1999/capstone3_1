@@ -3,6 +3,7 @@ package com.example.capstone3.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,9 @@ public class Property {
     private String description;
     private Boolean isApproved = false;
     private Boolean isRented = false;
+    @Positive(message = "Price must be positive")
+    @Column(nullable = false)
+    private Double price;
 
 
 

@@ -23,6 +23,7 @@ public class Bid {
     private Date bid_time;
     // علاقه مع الكستمر
     @ManyToMany(mappedBy = "bids")
+    @JsonIgnore
     private Set<Customer> customers;
     // علاقه مع المزاد
     @ManyToOne

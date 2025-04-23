@@ -27,11 +27,11 @@ public class BidController {
         bidService.addBidWithAuction(bid,idAuction);
         return ResponseEntity.status(200).body(new ApiResponse("The Bid has been added successfully."));
     }
-    @PostMapping("/add/{idBid},{idCustomer}")
-    public ResponseEntity assignBidToCustomer(@PathVariable Integer idBid,@PathVariable Integer idCustomer){
-        bidService.assignBidToCustomer(idCustomer,idBid);
-        return ResponseEntity.status(200).body(new ApiResponse("The Bid has been assign successfully."));
-    }
+//    @PostMapping("/add/{idBid},{idCustomer}")
+//    public ResponseEntity assignBidToCustomer(@PathVariable Integer idBid,@PathVariable Integer idCustomer){
+//        bidService.assignBidToCustomer(idCustomer,idBid);
+//        return ResponseEntity.status(200).body(new ApiResponse("The Bid has been assign successfully."));
+//    }
     @PutMapping("/update/{id}")
     public ResponseEntity updateBid(@PathVariable Integer id,@RequestBody @Valid Bid bid){
         bidService.updateBid(id,bid);

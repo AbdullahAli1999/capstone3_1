@@ -2,6 +2,7 @@ package com.example.capstone3.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -20,6 +21,6 @@ public class AuctionDTO {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime endTime;
 
-    @NotEmpty(message = "isActive must be not null")
+    @NotNull(message = "isActive must be not null")
     private Boolean isActive;
 }

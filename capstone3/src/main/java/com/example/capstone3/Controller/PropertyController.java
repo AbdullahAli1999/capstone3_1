@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/property")
 @RequiredArgsConstructor
@@ -37,5 +39,14 @@ public class PropertyController {
     public ResponseEntity delProperty(@PathVariable Integer id){
         propertyService.deleteProperty(id);
         return ResponseEntity.status(200).body(new ApiResponse("Deleted"));
+    }
+
+    @GetMapping("/filter-by-price/{min}/{max}")
+    public ResponseEntity<List<Property>> filterPropertiesByPrice(
+            @PathVariable Double min,
+            @PathVariable Double max) {
+
+        List<Property> properties = propertyService.getPropertyByPriceRange(min, max);
+        return ResponseEntity.ok(properties);
     }
 }

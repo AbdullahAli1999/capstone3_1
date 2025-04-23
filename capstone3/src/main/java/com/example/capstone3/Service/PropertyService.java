@@ -10,6 +10,7 @@ import com.example.capstone3.Repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,6 +58,18 @@ public class PropertyService {
             throw new ApiException("Property not found");
         }
         propertyRepository.delete(delProperty);
+    }
+
+    //4.endpoint //Abdullah //range
+    public List<Property> getPropertyByPriceRange(Double min,Double max){
+        List<Property> allProperty = propertyRepository.findAll();
+        List<Property> filtered = new ArrayList<>();
+        for (Property property : allProperty){
+            if (property.getPrice() >= min && property.getPrice() <= max){
+                filtered.add(property);
+            }
+        }
+        return filtered;
     }
 
     //Add with

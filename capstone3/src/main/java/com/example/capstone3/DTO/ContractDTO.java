@@ -1,6 +1,7 @@
 package com.example.capstone3.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class ContractDTO {
 
     private Integer bid_id;
-
+    private Integer customer_id;
     @NotEmpty(message = "contract can not be empty")
     private String contractType;
 
@@ -33,6 +34,7 @@ public class ContractDTO {
 
     @NotEmpty(message = "name must be not empty")
     private String nameOfNewOwner;
+
 
 
 }

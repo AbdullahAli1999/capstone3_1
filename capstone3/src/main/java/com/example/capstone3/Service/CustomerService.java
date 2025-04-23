@@ -13,6 +13,7 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final EmailService emailService;
 
 
     public List<Customer> getAllCustomer(){
@@ -22,6 +23,12 @@ public class CustomerService {
 
     public void addCustomer(Customer customer){
         customerRepository.save(customer);
+        String to = customer.getEmail();
+        String subject = "Welcome to Our Service!";
+        String body = "Dear " + customer.getName() + ",\n\nWelcome to our platform! We are excited to have you onboard.";
+
+        // Assuming emailService is already injected and configured
+        emailService.sendEmail(to, subject, body);
     }
 
 
