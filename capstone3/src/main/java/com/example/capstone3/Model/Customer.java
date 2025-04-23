@@ -41,6 +41,7 @@ public class Customer {
 
 
     @ManyToMany
+    @JsonIgnore
     private Set<Bid> bids;
 
     @OneToMany(mappedBy = "customer")

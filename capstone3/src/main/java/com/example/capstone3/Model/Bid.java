@@ -32,5 +32,6 @@ public class Bid {
     private Auction auction;
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "bid")
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private Contract contract;
 }

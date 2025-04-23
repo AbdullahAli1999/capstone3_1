@@ -5,13 +5,23 @@ import com.example.capstone3.DTO.ContractDTO;
 import com.example.capstone3.Model.Bid;
 import com.example.capstone3.Model.Contract;
 import com.example.capstone3.Model.Customer;
+import com.example.capstone3.Model.Property;
 import com.example.capstone3.Repository.BidRepository;
 import com.example.capstone3.Repository.ContractRepository;
 import com.example.capstone3.Repository.CustomerRepository;
+import com.example.capstone3.Repository.PropertyRepository;
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +33,7 @@ public class ContractService {
     private final BidRepository bidRepository;
     private final CustomerRepository customerRepository;
     private final EmailService emailService;
+    private final PropertyRepository propertyRepository;
 
 
 
@@ -37,7 +48,9 @@ public class ContractService {
         if(bid==null){
             throw new ApiException("bid not found");
         }
+        customer.getBids().add(bid);
         Contract contract=new Contract(null, contractDTO.getContractType(),contractDTO.getIssueDate(),contractDTO.getTotalAmount(), contractDTO.getStatus(), contractDTO.getNameOfNewOwner(),bid,customer);
+        contract.setNameOfNewOwner(customer.getName());
         contractRepository.save(contract);
     }
 
@@ -177,6 +190,27 @@ public class ContractService {
         emailService.sendEmail(email, "Your Contract Info", message);
 
     }
+
+
+    /// ///////////////////////////
+    //7.endpoint //Archive //Abdullah
+
+    public List<Contract> oldContracts(LocalDate beforeDate){
+        List<Contract> contracts = contractRepository.findAll();
+        List<Contract> oldContract = new ArrayList<>();
+        for (Contract contract : contracts){
+            if (contract.getIssueDate().isBefore(beforeDate)){
+                oldContract.add(contract);
+
+            }
+        }
+        if (oldContract.isEmpty()){
+            throw new ApiException("no contract before");
+        }
+        return oldContract;
+    }
+
+
 
     }
 
