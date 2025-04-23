@@ -32,6 +32,9 @@ public class Property {
     @Positive(message = "Price must be positive")
     @Column(nullable = false)
     private Double price;
+    @NotEmpty(message = "The Location can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    private String location;
 
 
 

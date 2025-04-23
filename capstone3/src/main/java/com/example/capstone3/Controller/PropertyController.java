@@ -49,4 +49,12 @@ public class PropertyController {
         List<Property> properties = propertyService.getPropertyByPriceRange(min, max);
         return ResponseEntity.ok(properties);
     }
+
+    //6.Find Location
+    @GetMapping("/location/{loc}")
+    public ResponseEntity<List<Property>> getLocationBySearch(@PathVariable String loc){
+        List<Property> properties = propertyService.getPropertyByLocation(loc);
+        return ResponseEntity.status(200).body(properties);
+
+    }
 }

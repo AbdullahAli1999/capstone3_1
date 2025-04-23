@@ -72,6 +72,22 @@ public class PropertyService {
         return filtered;
     }
 
+    //6.endpoint //Abdullah //By Location
+    public List<Property> getPropertyByLocation(String loc){
+        List<Property> properties = propertyRepository.findPropertyByLocation(loc);
+        List<Property> byLoc = new ArrayList<>();
+        if (loc == null){
+            throw new ApiException("Location not found");
+        }
+        for (Property property : properties){
+            if (property.getLocation().equalsIgnoreCase(loc)){
+                byLoc.add(property);
+            }
+        }
+        return byLoc;
+
+    }
+
     //Add with
 
     //Assign
